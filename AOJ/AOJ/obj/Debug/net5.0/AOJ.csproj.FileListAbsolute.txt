@@ -1,0 +1,16 @@
+D:\argorithm\AOJ\bin\Debug\net5.0\AOJ.exe
+D:\argorithm\AOJ\bin\Debug\net5.0\AOJ.deps.json
+D:\argorithm\AOJ\bin\Debug\net5.0\AOJ.runtimeconfig.json
+D:\argorithm\AOJ\bin\Debug\net5.0\AOJ.runtimeconfig.dev.json
+D:\argorithm\AOJ\bin\Debug\net5.0\AOJ.dll
+D:\argorithm\AOJ\bin\Debug\net5.0\ref\AOJ.dll
+D:\argorithm\AOJ\bin\Debug\net5.0\AOJ.pdb
+D:\argorithm\AOJ\obj\Debug\net5.0\AOJ.csproj.AssemblyReference.cache
+D:\argorithm\AOJ\obj\Debug\net5.0\AOJ.GeneratedMSBuildEditorConfig.editorconfig
+D:\argorithm\AOJ\obj\Debug\net5.0\AOJ.AssemblyInfoInputs.cache
+D:\argorithm\AOJ\obj\Debug\net5.0\AOJ.AssemblyInfo.cs
+D:\argorithm\AOJ\obj\Debug\net5.0\AOJ.csproj.CoreCompileInputs.cache
+D:\argorithm\AOJ\obj\Debug\net5.0\AOJ.dll
+D:\argorithm\AOJ\obj\Debug\net5.0\ref\AOJ.dll
+D:\argorithm\AOJ\obj\Debug\net5.0\AOJ.pdb
+D:\argorithm\AOJ\obj\Debug\net5.0\AOJ.genruntimeconfig.cache
