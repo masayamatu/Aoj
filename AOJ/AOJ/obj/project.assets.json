@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\argorithm\\AOJ\\AOJ.csproj",
+      "projectUniqueName": "C:\\Users\\mmasa\\OneDrive\\ドキュメント\\GitHub\\Aoj\\AOJ\\AOJ\\AOJ.csproj",
       "projectName": "AOJ",
-      "projectPath": "D:\\argorithm\\AOJ\\AOJ.csproj",
+      "projectPath": "C:\\Users\\mmasa\\OneDrive\\ドキュメント\\GitHub\\Aoj\\AOJ\\AOJ\\AOJ.csproj",
       "packagesPath": "C:\\Users\\mmasa\\.nuget\\packages\\",
-      "outputPath": "D:\\argorithm\\AOJ\\obj\\",
+      "outputPath": "C:\\Users\\mmasa\\OneDrive\\ドキュメント\\GitHub\\Aoj\\AOJ\\AOJ\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mmasa\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1040,11 +1040,7 @@ class Solve
                         break;
                     }
                 }
-                if(graph[now].Count() == 0)
-                {
-
-                }
-                else
+                if(graph[now].Count() != 0)
                 {
                     next = graph[now][0];
                     graph[now].RemoveAt(0);
@@ -1064,7 +1060,117 @@ class Solve
             }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
         }
     }
-    
+    public static void ALDS1_11_C()
+    {
+        int N = int.Parse(Console.ReadLine());
+        var graph = new List<int>[N];
+        var min = new int[N];
+        for(int i = 0; i < N; i++)
+        {
+            graph[i] = new List<int>();
+            min[i] = 101;
+        }
+        for(int i = 0; i < N; i++)
+        {
+            var read = Console.ReadLine().Split();
+            for(int j = 0; j < int.Parse(read[1]); j++)
+            {
+                graph[int.Parse(read[0]) - 1].Add(int.Parse(read[2 + j])- 1);
+            }
+        }
+        var q = new Queue<int>();
+        q.Enqueue(0);
+        bfs(q, graph, min);
+        for(int i = 0; i < N; i++)
+        {
+            min[i] = (min[i] == 101) ? -1 : min[i];
+            Console.WriteLine($"{i + 1} {min[i]}");
+        }  
+    }
+    public static void bfs(Queue<int> q, List<int>[] graph, int[] min)
+    {
+        int now = q.Peek();
+        min[now] = 0;
+        while(q.Count() != 0)
+        {
+            now = q.Dequeue();
+            while(graph[now].Count() != 0)
+            {
+                if(min[graph[now][0]] == 101)
+                {
+                    q.Enqueue(graph[now][0]);
+                    min[graph[now][0]] = min[now] + 1;
+                    graph[now].RemoveAt(0);
+                }
+                else
+                {
+                    graph[now].RemoveAt(0);
+                }
+                    
+            }
+        }
+    }
+    public static void ALDS1_11_D()
+    {
+        var read = Console.ReadLine().Split();
+        int N = int.Parse(read[0]);
+        int M = int.Parse(read[1]);
+        var graph = new List<int>[N];
+        var connect = new int[N];
+        int id = 0;
+        for(int i = 0; i < N; i++)
+        {
+            graph[i] = new List<int>();
+            connect[i] = -1;
+        }
+        for(int i = 0; i < M; i++)
+        {
+            var read2 = Console.ReadLine().Split();
+            graph[int.Parse(read2[0])].Add(int.Parse(read2[1]));
+        }
+        for(int i = 0; i < N; i++)
+        {
+            if(connect[i] == -1)
+            {
+                dfs2(graph, connect, i , id);
+                id++;
+            }
+        }
+        var read3 = int.Parse(Console.ReadLine());
+        for(int i = 0; i < read3; i++)
+        {
+            var read4 = Console.ReadLine().Split();
+            if(connect[int.Parse(read4[0])] == connect[int.Parse(read4[1])])
+            {
+                Console.WriteLine("yes");
+            }
+            else
+            {
+                Console.WriteLine("no");
+            }
+            
+        }
+
+    }
+    public static void dfs2(List<int>[] graph,int[] c, int n , int m)
+    {
+        var s = new Stack<int>();
+        s.Push(n);
+        int now = n;
+        c[now] = m;
+        while(s.Count() != 0)
+        {
+            now = s.Pop();
+            for(int i = 0; i < graph[now].Count(); i++)
+            {
+                if(c[graph[now][i]] == -1)
+                {
+                    c[graph[now][i]] = m;
+                    s.Push(graph[now][i]);
+                }   
+            }
+        }
+    }
 }
 
 
