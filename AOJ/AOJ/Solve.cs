@@ -1127,6 +1127,7 @@ class Solve
         {
             var read2 = Console.ReadLine().Split();
             graph[int.Parse(read2[0])].Add(int.Parse(read2[1]));
+            graph[int.Parse(read2[1])].Add(int.Parse(read2[0]));
         }
         for(int i = 0; i < N; i++)
         {
@@ -1170,6 +1171,65 @@ class Solve
                 }   
             }
         }
+    }
+    public static void ALDS1_12_A()
+    {
+        int N = int.Parse(Console.ReadLine());
+        var graph = new int[N][];
+        int[] min = new int[N];
+        int[] parent = new int[N];
+        int[] visited = new int[N];
+        for(int i = 0; i < N; i++)
+        {
+            var read = Console.ReadLine().TrimStart().Split();
+            graph[i] = new int[N];
+            min[i] = 2001;
+            visited[i] = -1;
+            parent[i] = -1;
+            for(int j = 0; j < read.Length; j++)
+            {
+                graph[i][j] = int.Parse(read[j]);
+            }
+        }
+        int ans = prim(min, parent, visited, graph);
+        Console.WriteLine(ans);
+    }
+    public static int prim(int[] min, int[] parent, int[] visited, int[][] graph)
+    {
+        min[0] = 0;
+        while(true)
+        {
+            int minTemp = 2001;
+            int u = -1;
+            for(int i = 0; i < min.Length; i++)
+            {
+                if(min[i] < minTemp && visited[i] != 2)
+                {
+                    u = i;
+                    minTemp = min[i];
+                }
+            }
+            if(u == -1) break;
+            visited[u] = 2;
+            for(int i = 0; i < min.Length; i++)
+            {
+                if(visited[i] != 2 && graph[u][i] != -1)
+                {
+                    if(graph[u][i] < min[i])
+                    {
+                        min[i] = graph[u][i];
+                        parent[i] = u;
+                        visited[i] = 1;
+                    }
+                }
+            }
+        }
+        int sum = 0;
+        for(int i = 0; i < min.Length; i++)
+        {
+            if(parent[i] != -1) sum += graph[i][parent[i]];
+        }
+        return sum;
     }
 }
 
