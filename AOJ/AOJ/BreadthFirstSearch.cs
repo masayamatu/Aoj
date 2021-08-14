@@ -5,12 +5,12 @@ using System.Linq;
 
 namespace DataStructure
 {
-    public class DepthFirstSearch<T>
+    public class BreadthFirstSearch<T>
     {
         private Dictionary<T, Node> _graph;
         private Dictionary<T, bool> _memo;
         private T _memoStart;
-        public DepthFirstSearch(IEnumerable<T> V)
+        public BreadthFirstSearch(IEnumerable<T> V)
         {
             _graph = new Dictionary<T, Node>();
             _memo = new Dictionary<T, bool>();
@@ -19,7 +19,7 @@ namespace DataStructure
                 _graph[v] = new Node();
             }
         }
-        public DepthFirstSearch<T> Add(T from, T to)
+        public BreadthFirstSearch<T> Add(T from, T to)
         {
             _memo = new Dictionary<T, bool>();
             _memoStart = default(T);
@@ -30,17 +30,17 @@ namespace DataStructure
         {
             if(Equals(_memoStart, start) && _memo.ContainsKey(target)) return _memo[target];
              foreach(var node in _graph) node.Value.IsSeen = false;
-             var s = new Stack<T>();
-             s.Push(start);
+             var q = new Queue<T>();
+             q.Enqueue(start);
              _graph[start].IsSeen = true;
-             while(s.Count != 0)
+             while(q.Count != 0)
              {
-                 T now = s.Pop();
+                 T now = q.Dequeue();
                  foreach(var v in _graph[now].To)
                  {
                      if(!_graph[v].IsSeen)
                      {
-                         s.Push(v);
+                         q.Enqueue(v);
                          _graph[v].IsSeen = true;
                      }
                  }

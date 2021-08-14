@@ -1326,6 +1326,85 @@ class Solve
             Console.WriteLine($"{i} {mincost[i]}");
         }
     }
+    public static void Volume11_B()
+    {
+        while(true)
+        {
+            var read = Console.ReadLine().Split().Select(int.Parse).ToArray();
+            int w = read[0];
+            int h = read[1];
+            if(w == 0 && h == 0) break;
+            int[][] field = new int[h][];
+            var graph = new Dictionary<Tuple<int, int>, List<Tuple<int,int>>>();
+            var dx = new int[]{-1,0,1};
+            var dy = new int[]{-1,0,1};
+            int[][] visited = new int[h][];
+            int id = 0;
+            for(int i = 0; i < h; i++)
+            {
+                field[i] = new int[w];
+                visited[i] = new int[w];
+                var read2 = Console.ReadLine().Split().Select(int.Parse).ToArray();
+                for(int j = 0; j < w; j++)
+                {
+                    field[i][j] = read2[j];
+                    visited[i][j] = -1;
+                }
+            }
+            for(int i = 0; i < h; i++)
+            {
+                for(int j = 0; j < w; j++)
+                {
+                    graph.Add(Tuple.Create(i, j), new List<Tuple<int, int>>());
+                    foreach(var x in dx)
+                    {
+                        foreach(var y in dy)
+                        {
+                            if(x == 0 && y == 0) continue;
+                            if(field[i][j] != 0 && (i + y) >= 0 && (i + y) < h && j + x >= 0 && j + x < w)
+                            {
+                                if(field[i + y][j + x] == 1)
+                                {
+                                    graph[Tuple.Create(i, j)].Add(Tuple.Create(i + y, j + x));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for(int i = 0; i < h; i++)
+            {
+                for(int j = 0; j < w; j++)
+                {
+                    if(visited[i][j] == -1 && field[i][j] == 1)
+                    {
+                        var s = new Stack<Tuple<int, int>>();
+                        s.Push(Tuple.Create(i,j));
+                        dfs3(graph, s, visited, id);
+                        id++;
+                    }
+                }
+            }
+            Console.WriteLine(id);
+        }
+    }
+    public static void dfs3(Dictionary<Tuple<int, int>, List<Tuple<int,int>>> graph,Stack<Tuple<int, int>> s,int[][] visited,int id)
+    {
+        var now = s.Peek();
+        while(s.Count() != 0)
+        {
+            now = s.Pop();
+            visited[now.Item1][now.Item2] = id;
+            for(int i = 0; i < graph[now].Count(); i++)
+            {
+                if(visited[graph[now][i].Item1][graph[now][i].Item2] == -1)
+                {
+                    visited[graph[now][i].Item1][graph[now][i].Item2] = id;
+                    s.Push(graph[now][i]);
+                }   
+            }
+        }
+    }
 }
 
 
