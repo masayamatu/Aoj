@@ -24,6 +24,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using DataStructure;
 
 class Solve
 {
@@ -1287,6 +1288,24 @@ class Solve
                     }
                 }
             }
+        }
+    }
+    public static void ALDS1_12_C()
+    {
+        int N = int.Parse(Console.ReadLine());
+        var dijkstra = new Dijkstra(N);
+        for(int i = 0; i < N; i++)
+        {
+            var read = Console.ReadLine().Split().Select(int.Parse).ToArray();
+            for(int j = 0; j < read[1] * 2; j += 2)
+            {
+                dijkstra.Add(i, read[j + 2], read[j + 3]);
+            }
+        }
+        var mincost = dijkstra.GetMinCost(0);
+        for(int i = 0; i < N; i++)
+        {
+            Console.WriteLine($"{i} {mincost[i]}");
         }
     }
 }

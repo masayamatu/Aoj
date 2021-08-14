@@ -60,6 +60,8 @@ namespace DataStructure
             }
             return _array[Count];
         }
+        //すべての値を取り出し
+        //引数１：True　Pop（）, False　値を取り出だけ
         public IEnumerable<T> GetAllElements(bool withPop = true)
         {
             int count = Count;
@@ -69,11 +71,13 @@ namespace DataStructure
                 else yield return _array[count - i - 1];
             }
         }
+        // 引数同士を比較
         private int Compare(T a, T b)
         {
             if(_comparer == null) return a.CompareTo(b);
             return _comparer.Compare(a, b);
         }
+        //引数２箇所の入れ替え
         private void Swap(int a, int b)
         {
             var temp = _array[a];
