@@ -5,6 +5,6 @@ class Program
 {
     static void Main(string[] args)
     {
-        Solve.ALDS1_11_D();
+        Solve.ALDS1_12_B();
     }
 }

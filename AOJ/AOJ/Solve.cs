@@ -1231,6 +1231,64 @@ class Solve
         }
         return sum;
     }
+    public static void ALDS1_12_B()
+    {
+        int N = int.Parse(Console.ReadLine());
+        var graph = new int[N][];
+        var parent = new int[N];
+        var min = new int[N];
+        var visited = new int[N];
+        for(int i = 0; i < N; i++)
+        {
+            graph[i] = new int[N];
+            parent[i] = -1;
+            min[i] = int.MaxValue;
+            visited[i] = -1;
+            var read = Console.ReadLine().Split();
+            int  v = int.Parse(read[1]);
+            for(int j = 0; j < 2*v; j += 2)
+            {
+                graph[i][int.Parse(read[j + 2])] = int.Parse(read[j + 3]);
+            }
+        }
+        dijkstra(graph, parent, min, visited);
+        for(int i = 0; i < min.Length; i++)
+        {
+            min[i] = min[i] == int.MaxValue ? -1 : min[i];
+            Console.WriteLine($"{i} {min[i]}");
+        }
+    }
+    public static void dijkstra(int[][] graph, int[] parent, int[] min, int[] visited)
+    {
+        int now = 0;
+        min[now] = 0;
+        while(true)
+        {
+            int minTemp = int.MaxValue;
+            for(int i = 0; i < min.Length; i++)
+            {
+                if(visited[i] != 2 && min[i] < minTemp)
+                {
+                    minTemp = min[i];
+                    now = i;
+                }
+            }
+            if(minTemp == int.MaxValue) break;
+            visited[now] = 2;
+            for(int i = 0; i < min.Length; i++)
+            {
+                if(visited[i] != 2 && graph[now][i] != 0)
+                {
+                    if(min[now] + graph[now][i] < min[i])
+                    {
+                        min[i] = min[now] + graph[now][i];
+                        parent[i] = now;
+                        visited[i] = 1;
+                    }
+                }
+            }
+        }
+    }
 }
 
 
