@@ -988,6 +988,24 @@ class Solve
         Console.WriteLine(Math.Pow(p3, 1.0/3.0));
         Console.WriteLine(max);
     }
+    public static void ALDS1_9_C()
+    {
+        var p = new PriorityQueue<int>(2000000);
+        while(true)
+        {
+            var read = Console.ReadLine().Split();
+            if(read[0] == "end") break;
+            else if(read[0] == "insert")
+            {
+                p.Push(int.Parse(read[1]));
+            }
+            else
+            {
+                Console.WriteLine(p.Pop());
+            }
+
+        }
+    }
     public static void ALDS1_11_B()
     {
         int N = int.Parse(Console.ReadLine());
