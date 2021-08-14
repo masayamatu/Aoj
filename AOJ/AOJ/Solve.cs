@@ -1246,7 +1246,7 @@ class Solve
             visited[i] = -1;
             var read = Console.ReadLine().Split();
             int  v = int.Parse(read[1]);
-            for(int j = 0; j < 2*v; j += 2)
+            for(int j = 0; j < 2 * v; j += 2)
             {
                 graph[i][int.Parse(read[j + 2])] = int.Parse(read[j + 3]);
             }
