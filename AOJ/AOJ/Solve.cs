@@ -1428,6 +1428,18 @@ class Solve
             }
         }
     }
+    public static void GRL_2_A()
+    {
+        var read = Console.ReadLine().Split().Select(int.Parse).ToArray();
+        Kruskal kruskal = new Kruskal(read[0]);
+        for(int i = 0; i < read[1]; i++)
+        {
+            var read2 = Console.ReadLine().Split().Select(int.Parse).ToArray();
+            kruskal.Add(read2[0], read2[1], read2[2]);
+        }
+        long ans = kruskal.GetMinSpanCost();
+        Console.WriteLine(ans);
+    }
 }
 
 

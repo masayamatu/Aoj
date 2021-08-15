@@ -7,6 +7,6 @@ class Program
 {
     static void Main(string[] args)
     {
-        Solve.DSL_1_A();
+        Solve.GRL_2_A();
     }
 }

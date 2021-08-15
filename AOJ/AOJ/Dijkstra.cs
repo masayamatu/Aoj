@@ -46,7 +46,7 @@ namespace DataStructure
         }
     }
     //接続先とコストを記録
-    public struct Edge
+    public struct Edge : IComparable<Edge>
     {
         public int to;
         public long cost;
@@ -55,6 +55,7 @@ namespace DataStructure
             this.to = to;
             this.cost = cost;
         }
+        public int CompareTo(Edge other) => cost.CompareTo(other.cost);
     }
     //頂点番号と頂点までのコストを保持
     public struct Vertex : IComparable<Vertex>
