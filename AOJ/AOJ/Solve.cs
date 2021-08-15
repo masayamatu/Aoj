@@ -1405,6 +1405,29 @@ class Solve
             }
         }
     }
+    public static void DSL_1_A()
+    {
+        var read = Console.ReadLine().Split().Select(int.Parse).ToArray();
+        var dataSet = new int[read[0]];
+        for(int i = 0; i < dataSet.Length; i++)
+        {
+            dataSet[i] = i;
+        }
+        var trees = new UnionFind<int>(dataSet);
+        for(int i = 0; i < read[1]; i++)
+        {
+            var read2 = Console.ReadLine().Split().Select(int.Parse).ToArray();
+            if(read2[0] == 0)
+            {
+                trees.Unite(read2[1], read2[2]);
+            }
+            else
+            {
+                int ans = trees.IsSame(read2[1], read2[2]) ? 1 : 0;
+                Console.WriteLine(ans);
+            }
+        }
+    }
 }
 
 

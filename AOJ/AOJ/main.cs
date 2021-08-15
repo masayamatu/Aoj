@@ -7,6 +7,6 @@ class Program
 {
     static void Main(string[] args)
     {
-        Solve.Volume11_B();
+        Solve.DSL_1_A();
     }
 }
