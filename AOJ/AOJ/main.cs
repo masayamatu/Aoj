@@ -7,6 +7,6 @@ class Program
 {
     static void Main(string[] args)
     {
-        Solve.GRL_2_A();
+        Solve.DPL_2_A_sample();
     }
 }

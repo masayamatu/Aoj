@@ -1440,6 +1440,395 @@ class Solve
         long ans = kruskal.GetMinSpanCost();
         Console.WriteLine(ans);
     }
+    public static void Volume20_2013()
+    {
+        while(true)
+        {
+            int n = int.Parse(Console.ReadLine());
+            if(n == 0) break;
+            var time = new int[24,60,60];
+            for(int i = 0; i < n; i++)
+            {
+                var read = Console.ReadLine().Split(' ',':').Select(int.Parse).ToArray();
+                time[read[0], read[1], read[2]]++;
+                time[read[3], read[4], read[5]]--;
+            }
+            int count = 0;
+            int max = 0;
+            for(int i = 0; i < 24; i++)
+            {
+                for(int j = 0; j < 60; j++)
+                {
+                    for(int k = 0; k < 60; k++)
+                    {
+                        count += time[i, j, k];
+                        max = Math.Max(max, count);
+                    }
+                }
+            }
+            Console.WriteLine(max);
+        }
+    }
+    public static void ALDS1_10_A()
+    {
+        int N = int.Parse(Console.ReadLine());
+        int ans = fibonacci(N);
+        Console.WriteLine(ans);
+
+    }
+    public static int fibonacci(int n)
+    {
+        var fib = new int[n + 1];
+        fib[0] = 1;
+        fib[1] = 1;
+        for(int i = 2; i < n + 1; i++)
+        {
+            fib[i] = fib[i - 1] + fib[i - 2];
+        }
+        return fib[n];
+    }
+    public static void DPL_1_B()
+    {
+        var read = Console.ReadLine().Split().Select(int.Parse).ToArray();
+        var value = new int[read[0] + 1];
+        var weight = new int[read[0] + 1];
+        var dp = new int[read[0] + 1,read[1] + 1];
+        for(int i = 1; i <= read[0]; i++)
+        {
+            var read2 = Console.ReadLine().Split().Select(int.Parse).ToArray();
+            value[i] = read2[0];
+            weight[i] = read2[1];
+        }
+        int ans = 0;
+        for(int i = 1; i <= read[0]; i++)
+        {
+            for(int j = 1; j <= read[1]; j++)
+            {
+                if(j >= weight[i])
+                {
+                    dp[i,j] = Math.Max(dp[i - 1,j],value[i] + dp[i - 1,j - weight[i]]);
+                }
+                else
+                {
+                    dp[i,j] = dp[i - 1,j];
+                }
+                ans = Math.Max(ans, dp[i,j]);
+            }
+        }
+        Console.WriteLine(ans);
+    }
+    public static void DPL_1_A()
+    {
+        var nm = Console.ReadLine().Split().Select(int.Parse).ToArray();
+        var coin = Console.ReadLine().Split().Select(int.Parse).ToArray();
+        var min = Enumerable.Repeat<int>(int.MaxValue, nm[0] + 1).ToArray();
+        min[0] = 0;
+        for(int i = 0; i < coin.Length; i++)
+        {
+            for(int j = coin[i]; j <= nm[0]; j++)
+            {
+                min[j] = Math.Min(min[j],min[j - coin[i]] + 1);
+            }
+        }
+        Console.WriteLine(min[nm[0]]);
+
+    }
+    public static void DPL_1_C()
+    {
+        var read = Console.ReadLine().Split().Select(int.Parse).ToArray();
+        var value = new int[read[0] + 1];
+        var weight = new int[read[0] + 1];
+        var dp = new int[read[0] + 1,read[1] + 1];
+        for(int i = 1; i <= read[0]; i++)
+        {
+            var read2 = Console.ReadLine().Split().Select(int.Parse).ToArray();
+            value[i] = read2[0];
+            weight[i] = read2[1];
+        }
+        int ans = 0;
+        for(int i = 1; i <= read[0]; i++)
+        {
+            for(int j = 1; j <= read[1]; j++)
+            {
+                if(j >= weight[i])
+                {
+                    dp[i,j] = Math.Max(dp[i - 1,j],value[i] + dp[i,j - weight[i]]);
+                }
+                else
+                {
+                    dp[i,j] = dp[i - 1,j];
+                }
+                ans = Math.Max(ans, dp[i,j]);
+            }
+        }
+        Console.WriteLine(ans);
+    }
+    /// <summary>
+    /// 区間DP
+    /// </summary>
+    public static void ALDS1_10_C()
+    {
+        int n = int.Parse(Console.ReadLine());
+        for(int i = 0; i < n * 2;i += 2)
+        {
+            var read1 = Console.ReadLine();
+            var read2 = Console.ReadLine();
+            int max = lcs(read1, read2);
+            Console.WriteLine(max);
+
+        }
+    }
+    public static int lcs(String s, String t)
+    {
+        var dp = new int[1000, 1000];
+        int m = s.Length;
+        int n = t.Length;
+        s = " " + s;
+        t = " " + t;
+        for(int i = 0; i <= m;i++)
+        {
+            dp[i,0] = 0;
+        }
+        for(int i = 0; i <= n;i++)
+        {
+            dp[0,i] = 0;
+        }
+        int max = 0;
+        for(int i = 1; i <= m; i++)
+        {
+            for(int j = 1; j <= n; j++)
+            {
+                if(s[i] == t[j])
+                {
+                    dp[i,j] = dp[i - 1, j - 1] + 1;
+                }
+                else
+                {
+                    dp[i,j] = Math.Max(dp[i - 1,j], dp[i,j - 1]);
+                }
+                max = Math.Max(max, dp[i,j]);
+            }
+        }
+        return max;
+    }
+    public static void ALDS1_10_B()
+    {
+        int n = int.Parse(Console.ReadLine());
+        var matrix = new int[n + 1][];
+        var p = new int[n + 1];
+        for(int i = 1; i < n + 1; i++)
+        {
+            var read = Console.ReadLine().Split().Select(int.Parse).ToArray();
+            if(i == 1)
+            {
+                p[i - 1] = read[0];
+                p[i] = read[1];
+            }
+            else
+            {
+                p[i] = read[1];
+            }
+            
+            matrix[i] = new int[n + 1];
+            matrix[i][i] = 0;
+        }
+        for(int l = 2; l < n + 1; l++)
+        {
+            for(int i = 1; i <= n - l + 1; i++)
+            {
+                int j = i + l - 1;
+                matrix[i][j] = (1 << 21);
+                for(int k = i; k  < j; k++)
+                {
+                    matrix[i][j] = Math.Min(matrix[i][j], matrix[i][k] + matrix[k + 1][j] + p[i - 1] * p[k] * p[j]);
+                }
+            }
+        }
+        Console.WriteLine(matrix[1][n]);
+    }
+    /// <summary>
+    /// 区間DP
+    /// </summary>
+    public static void Volume16_1611()
+    {
+        while(true)
+        {
+            int n = int.Parse(Console.ReadLine());
+            if(n == 0) break;
+            var daruma = Console.ReadLine().Split().Select(int.Parse).ToArray();
+            var dp = new int[n,n];
+            for(int i = 1; i <= n - 1; i++)
+            {
+                for(int l = 0; l < n - i; l++)
+                {
+                    int r = l + i;
+                    daruma_memo(l, r, daruma, dp);
+                }
+            }
+            Console.WriteLine(dp[0, n - 1]);
+        }
+    }
+    public static void daruma_memo(int l, int r,int[] daruma, int[,] dp)
+    {
+        if(r - l == 1)
+        {
+            if(Math.Abs(daruma[r] - daruma[l]) <= 1) 
+            {
+                dp[l, r] = 2;
+            }
+            else
+            {
+                dp[l, r] = 0;
+            }  
+        }
+        else
+        {
+            if(Math.Abs(daruma[l] - daruma[r]) > 1)
+            {
+                for(int k = 0; k < r - l; k++)
+                {
+                    dp[l, r] =Math.Max(dp[l, r], dp[l, l +  k] + dp[l + k + 1, r]);
+                }
+            }
+            else
+            {
+                for(int k = 0; k < r - l; k++)
+                {
+                    dp[l, r] =Math.Max(dp[l, r], dp[l, l +  k] + dp[l + k + 1, r]);
+                }
+                if((r - l - 1) == dp[l + 1, r - 1])
+                {
+                    dp[l, r] =Math.Max(dp[l, r], dp[l + 1, r - 1] + 2);
+                }
+
+            }
+
+        }
+    }
+    /// <summary>
+    /// 巡回セールスマン
+    /// </summary>
+    public static void DPL_2_A()
+    {
+        var read = Console.ReadLine().Split().Select(int.Parse).ToArray();
+        var distance = new int[read[0], read[0]];
+        for(int i = 0; i < distance.GetLength(0); i++)
+        {
+            for(int j = 0; j < distance.GetLength(1); j++)
+            {
+                distance[i, j] = -1;
+            }
+        }
+        for(int i = 0; i < read[1]; i++)
+        {
+            var readD = Console.ReadLine().Split().Select(int.Parse).ToArray();
+            distance[readD[0], readD[1]] = readD[2];
+        }
+        var dp = new int[1 << 15, 15];
+        for(int i = 0; i < 1 << 15; i++)
+        {
+            for(int j = 0; j < 15; j++)
+            {
+                dp[i, j] = -1;
+            }
+        }
+        var res = sales(dp, distance, (1 << read[0]) - 1, 0);
+        Console.WriteLine(res < 200000000 ? res : -1);
+    }
+    public static int sales(int[,] dp,int[,] distance, int bit, int v)
+    {
+        if(dp[bit, v] != -1) return dp[bit, v];
+        if(bit == (1 << v))
+        {
+            if(distance[0, v] != -1) return distance[0, v];
+            else return 200000000;
+        }
+        var res = 200000000;
+        int prev_bit = bit & ~(1 << v);
+        for(int u = 0; u < distance.GetLength(0); u++)
+        {
+            if((prev_bit & (1 << u)) == 0) continue;
+            if(distance[u, v] == -1) continue;
+            if(res > sales(dp, distance, prev_bit, u) + distance[u, v])
+            {
+                res = sales(dp, distance, prev_bit, u) + distance[u, v];
+            }
+        }
+        return dp[bit, v] = res;
+    }
+    public static void DPL_2_A_sample()
+    {
+        var firstLine = Console.ReadLine().Split(' ').Select(value => int.Parse(value)).ToArray();
+			var v = firstLine[0];
+			var e = firstLine[1];
+
+			var pathes = new Dictionary<int, Dictionary<int, int>>();
+
+			for(var i = 0; i < e; i++)
+			{
+				var line = Console.ReadLine().Split(' ').Select(value => int.Parse(value)).ToArray();
+
+				if(!pathes.ContainsKey(line[0]))
+				{
+					pathes.Add(line[0], new Dictionary<int, int>());
+				}
+				pathes[line[0]].Add(line[1], line[2]);
+			}
+
+			var costs = new long[(1 << v) + 1, v + 1];
+			for(var i = 0; i <= (1 << v); i++)
+			{
+				for(var j = 0; j <= v; j++)
+				{
+					costs[i, j] = -1;
+				}
+			}
+
+			long min = Dp(costs, pathes, (1 << v) - 1, 0, 0, v);
+
+			Console.WriteLine(min < int.MaxValue ? min : -1);
+    }
+    private static long Dp(long[,] costs, Dictionary<int, Dictionary<int, int>> pathes, int bit, int node, int goal, int v)
+		{
+			if(costs[bit, node] != -1)
+			{
+				return costs[bit, node];
+			}
+
+			if(bit == (1 << node))
+			{
+				return costs[bit, node] = 0;
+			}
+
+			long min = int.MaxValue;
+			int previewBit = bit;
+			if (node != goal)
+			{
+				previewBit &= ~(1 << node);
+			}
+			for(var i = 0; i < v; i++)
+			{
+				if((previewBit & (1 << i)) == 0)
+				{
+					continue;
+				}
+
+				if(!pathes.ContainsKey(node) || !pathes[node].ContainsKey(i))
+				{
+					continue;
+				}
+
+				if(i == goal && previewBit != (1 << goal))
+				{
+					continue;
+				}
+
+				min = Math.Min(min, Dp(costs, pathes, previewBit, i, goal, v) + pathes[node][i]);
+			}
+
+			return costs[bit, node] = min;
+		}
+        
 }
 
 
